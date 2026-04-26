@@ -4,7 +4,7 @@ vim.g.fff = {
 	lazy_sync = true,
 	debug = {
 		enabled = true,
-		show_scores = true,
+		show_scores = false,
 	},
 }
 
