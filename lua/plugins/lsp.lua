@@ -54,6 +54,14 @@ local servers = {
 	ty = {},
 	vtsls = {},
 	jdtls = {},
+	texlab = {
+		build = {
+			forwardSearchAfter = false,
+			onSave = false,
+		},
+	},
+	harper_ls = {},
+	powershell_es = {},
 }
 
 for server, config in pairs(servers) do
@@ -78,5 +86,6 @@ require("conform").setup({
 		json = { "oxfmt" },
 		go = { "gofmt", "goimports" },
 		typescriptreact = { "oxfmt" },
+		latex = { "tex-fmt" },
 	},
 })

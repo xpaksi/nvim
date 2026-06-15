@@ -29,6 +29,8 @@ now_if_args(function()
 		"java",
 		"diff",
 		"css",
+		"latex",
+		"powershell",
 	}
 
 	local installed = vim.api.nvim_get_runtime_file("parser/*", true)
