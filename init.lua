@@ -41,7 +41,7 @@ else
 
 	vim.opt.cursorline = true
 	vim.opt.scrolloff = 10
-	vim.opt.shell = "pwsh"
+	vim.opt.shell = "zsh"
 
 	vim.o.signcolumn = "yes"
 
@@ -49,8 +49,6 @@ else
 
 	vim.o.foldmethod = "indent"
 	vim.o.pumborder = "bold"
-
-	require("vim._core.ui2").enable({ enable = true })
 
 	vim.api.nvim_create_user_command("W", "w", { desc = "Write" })
 
@@ -96,6 +94,7 @@ else
 
 	vim.keymap.set("n", "<Tab>", ":bnext<CR>", { desc = "Next buffer" })
 	vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", { desc = "Previous buffer" })
+	vim.keymap.set("n", "<leader>t", "<cmd>enew | terminal<CR>", { desc = "Open terminal in new buffer" })
 
 	vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 	vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
@@ -114,6 +113,12 @@ else
 	require("plugins.lsp")
 	require("plugins.fff")
 	require("plugins.blink")
+	require("ui.statusline").setup()
+	require("ui.commandline").setup()
+	require("ui.lsp_list").setup()
+	require("ui.tabline").setup()
+	require("ui.lazygit").setup()
+	require("ui.hunk").setup()
 
 	vim.cmd.colorscheme("catppuccin-nvim")
 end

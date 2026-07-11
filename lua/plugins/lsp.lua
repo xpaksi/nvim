@@ -52,7 +52,6 @@ local servers = {
 	tailwindcss = {},
 	jsonls = {},
 	ty = {},
-	vtsls = {},
 	jdtls = {},
 	texlab = {
 		build = {
@@ -62,6 +61,7 @@ local servers = {
 	},
 	harper_ls = {},
 	powershell_es = {},
+	tsgo = {},
 }
 
 for server, config in pairs(servers) do
@@ -86,6 +86,6 @@ require("conform").setup({
 		json = { "oxfmt" },
 		go = { "gofmt", "goimports" },
 		typescriptreact = { "oxfmt" },
-		latex = { "tex-fmt" },
+		tex = { "tex-fmt" },
 	},
 })

@@ -3,5 +3,5 @@ vim.pack.add({
 })
 
 require("catppuccin").setup({
-	transparent_background = true,
+	transparent_background = false,
 })
