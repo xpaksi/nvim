@@ -4,4 +4,5 @@ vim.pack.add({
 
 require("catppuccin").setup({
 	transparent_background = false,
+	term_colors = true,
 })

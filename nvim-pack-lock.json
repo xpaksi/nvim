@@ -1,13 +1,20 @@
 {
   "plugins": {
     "blink.cmp": {
-      "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
-      "src": "https://github.com/Saghen/blink.cmp",
-      "version": "1.0.0 - 2.0.0"
+      "rev": "71dc7545c1f399c7f76eeef80efa1d8bda0ff471",
+      "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.indent": {
       "rev": "8b69b9262891fe81fe728fe6a52fa2a84dd5d5e0",
       "src": "https://github.com/saghen/blink.indent"
+    },
+    "blink.lib": {
+      "rev": "5876dd95deeb70aadbe9f1c0b7117a135061cdac",
+      "src": "https://github.com/saghen/blink.lib"
+    },
+    "blink.nvim": {
+      "rev": "d1e7c7c45d45c6b6a25427bf62db4db73b03ff3d",
+      "src": "https://github.com/saghen/blink.nvim"
     },
     "catppuccin": {
       "rev": "05e8787020dcfdb937bf2ff23855ea2415b4e072",
@@ -37,10 +44,6 @@
       "rev": "d224a1920728ba129880efc700d4a0180ac4ecbb",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
-    "nvim-tree.lua": {
-      "rev": "35d3511e7ad4cbfa44c78c406db663b6e2a07c0d",
-      "src": "https://github.com/nvim-tree/nvim-tree.lua"
-    },
     "nvim-treesitter": {
       "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
@@ -48,6 +51,10 @@
     "nvim-web-devicons": {
       "rev": "dad71387de386a946b123079d0e53f23028f3abd",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
+    },
+    "supermaven-nvim": {
+      "rev": "07d20fce48a5629686aefb0a7cd4b25e33947d50",
+      "src": "https://github.com/supermaven-inc/supermaven-nvim"
     }
   }
 }

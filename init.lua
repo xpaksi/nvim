@@ -35,6 +35,7 @@ else
 
 	vim.opt.updatetime = 250
 	vim.opt.timeoutlen = 300
+	vim.opt.autoread = true
 
 	vim.opt.splitright = true
 	vim.opt.splitbelow = true
@@ -60,33 +61,19 @@ else
 		end,
 	})
 
-	local function show_installed_plugins()
-		local plugins = vim.pack.get()
-		local lines = {}
-
-		for _, plugin in ipairs(plugins) do
-			local status = plugin.active and "✓" or "✗"
-			table.insert(lines, string.format("%s %s (%s)", status, plugin.spec.name, plugin.rev))
-		end
-
-		local buf = vim.api.nvim_create_buf(false, true)
-		vim.api.nvim_set_option_value("buftype", "nofile", { buf = buf })
-		vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf })
-		vim.api.nvim_set_option_value("modifiable", true, { buf = buf })
-		vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-		vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
-
-		vim.cmd("vsplit")
-		vim.api.nvim_win_set_buf(0, buf)
-	end
+	vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+		desc = "Reload files changed outside of Neovim",
+		group = vim.api.nvim_create_augroup("auto-reload-external-changes", { clear = true }),
+		callback = function()
+			if vim.fn.mode() ~= "c" then
+				vim.cmd("checktime")
+			end
+		end,
+	})
 
 	local function update_plugins()
 		vim.pack.update()
 	end
-
-	vim.api.nvim_create_user_command("ShowPlugins", show_installed_plugins, {
-		desc = "Show installed plugins",
-	})
 
 	vim.api.nvim_create_user_command("UpdatePlugins", update_plugins, {
 		desc = "Update installed plugins",
@@ -108,14 +95,18 @@ else
 
 	require("plugins.mini")
 	require("plugins.treesitter")
-	require("plugins.tree")
 	require("plugins.theme")
 	require("plugins.lsp")
 	require("plugins.fff")
 	require("plugins.blink")
+	require("plugins.expand-buffer")
+	require("plugins.supermaven")
+	require("plugins.opencode").setup()
 	require("ui.statusline").setup()
 	require("ui.commandline").setup()
+	require("ui.notification").setup()
 	require("ui.lsp_list").setup()
+	require("ui.pack").setup()
 	require("ui.tabline").setup()
 	require("ui.lazygit").setup()
 	require("ui.hunk").setup()
