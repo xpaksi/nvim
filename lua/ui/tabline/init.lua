@@ -37,7 +37,7 @@ local function is_managed_buffer(bufnr)
 	if not valid_buf(bufnr) or not vim.bo[bufnr].buflisted then
 		return false
 	end
-	return vim.bo[bufnr].filetype ~= "NvimTree"
+	return vim.bo[bufnr].filetype ~= "blink-tree"
 end
 
 local function buffer_name(bufnr)
@@ -111,7 +111,7 @@ end
 local function tree_width()
 	for _, winid in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
 		local bufnr = vim.api.nvim_win_get_buf(winid)
-		if valid_buf(bufnr) and vim.bo[bufnr].filetype == "NvimTree" then
+		if valid_buf(bufnr) and vim.bo[bufnr].filetype == "blink-tree" then
 			return vim.api.nvim_win_get_width(winid)
 		end
 	end
@@ -135,14 +135,14 @@ local function show_buffer(bufnr, preferred_win, add_jump)
 	local target = preferred_win
 	if valid_win(target) then
 		local target_buf = vim.api.nvim_win_get_buf(target)
-		if vim.bo[target_buf].filetype == "NvimTree" then
+		if vim.bo[target_buf].filetype == "blink-tree" then
 			target = nil
 		end
 	end
 	if not target then
 		for _, winid in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
 			local win_buf = vim.api.nvim_win_get_buf(winid)
-			if vim.bo[win_buf].filetype ~= "NvimTree" then
+			if vim.bo[win_buf].filetype ~= "blink-tree" then
 				target = winid
 				break
 			end
