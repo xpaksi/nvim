@@ -82,6 +82,32 @@ else
 	vim.keymap.set("n", "<Tab>", ":bnext<CR>", { desc = "Next buffer" })
 	vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", { desc = "Previous buffer" })
 	vim.keymap.set("n", "<leader>t", "<cmd>enew | terminal<CR>", { desc = "Open terminal in new buffer" })
+	vim.keymap.set("n", "<leader>bd", function()
+		local buf = vim.api.nvim_get_current_buf()
+		if vim.bo[buf].modified then
+			vim.notify("Buffer not closed: unsaved changes", vim.log.levels.WARN)
+			return
+		end
+		-- Switch every window showing this buffer to another buffer first,
+		-- so deleting it doesn't close the window/split itself
+		for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+			vim.api.nvim_win_call(win, function()
+				local alt = vim.fn.bufnr("#")
+				if alt > 0 and alt ~= buf and vim.fn.buflisted(alt) == 1 then
+					vim.cmd.buffer(alt)
+				else
+					vim.cmd.bprevious()
+					if vim.api.nvim_get_current_buf() == buf then
+						vim.cmd.enew()
+					end
+				end
+			end)
+		end
+		local ok, err = pcall(vim.api.nvim_buf_delete, buf, {})
+		if not ok then
+			vim.notify("Buffer not closed: " .. tostring(err), vim.log.levels.WARN)
+		end
+	end, { desc = "Delete active buffer" })
 
 	vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 	vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })

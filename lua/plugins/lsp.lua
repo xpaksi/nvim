@@ -62,6 +62,7 @@ local servers = {
 	harper_ls = {},
 	powershell_es = {},
 	tsgo = {},
+	ols = {},
 }
 
 for server, config in pairs(servers) do
